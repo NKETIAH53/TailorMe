@@ -1,0 +1,8 @@
+django
+djangorestframework
+django-environ
+flake8
+black
+isort
+django-phonenumber-field
+psycopg
