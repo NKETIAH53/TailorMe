@@ -38,7 +38,11 @@ DJANGO_APPS = [
 
 SITE_ID = 1
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    "apps.common",
+    "apps.users",
+    "apps.profiles",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -56,6 +60,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+AUTH_USER_MODEL = "users.User"
 
 ROOT_URLCONF = "tailor_me.urls"
 
