@@ -5,7 +5,9 @@
 #    pip-compile
 #
 asgiref==3.7.2
-    # via django
+    # via
+    #   django
+    #   django-countries
 black==23.7.0
     # via -r requirements.in
 click==8.1.6
@@ -13,11 +15,18 @@ click==8.1.6
 django==4.2.4
     # via
     #   -r requirements.in
+    #   django-model-utils
     #   django-phonenumber-field
     #   djangorestframework
+django-countries==7.5.1
+    # via -r requirements.in
 django-environ==0.10.0
     # via -r requirements.in
+django-model-utils==4.3.1
+    # via -r requirements.in
 django-phonenumber-field==7.1.0
+    # via -r requirements.in
+django-phonenumbers==1.0.1
     # via -r requirements.in
 djangorestframework==3.14.0
     # via -r requirements.in
@@ -33,6 +42,10 @@ packaging==23.1
     # via black
 pathspec==0.11.2
     # via black
+phonenumbers==8.13.18
+    # via django-phonenumbers
+pillow==10.0.0
+    # via -r requirements.in
 platformdirs==3.10.0
     # via black
 psycopg==3.1.10
@@ -50,4 +63,5 @@ tomli==2.0.1
 typing-extensions==4.7.1
     # via
     #   asgiref
+    #   django-countries
     #   psycopg

@@ -6,3 +6,7 @@ black
 isort
 django-phonenumber-field
 psycopg
+django-countries
+django-model-utils
+django-phonenumbers
+pillow
