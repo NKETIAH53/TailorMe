@@ -13,12 +13,14 @@ def upload_profile_photo(instance, filename):
     return f"profile/{instance.user.id}/{filename}"
 
 
-class CommonProfileFields(TimeStampModel):
+class UserProfile(TimeStampModel):
+
     GENDER_CHOICES = Choices(
         'male', _('Male'),
         'female', _('Female')
     )
 
+    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     country = CountryField(
         verbose_name=_("Country"),
         default="GH",
@@ -58,19 +60,15 @@ class CommonProfileFields(TimeStampModel):
         choices=GENDER_CHOICES
     )
 
-
-class UserProfile(CommonProfileFields):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
 
-class UserMeasurements(CommonProfileFields):
-
+class UserMeasurements(TimeStampModel):
     profile = models.ForeignKey(
         UserProfile,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='measurements'
     )
     neck = models.DecimalField(
         verbose_name="Around neck",
