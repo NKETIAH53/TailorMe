@@ -1,17 +1,14 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from .managers import CustomUserManager
 from model_utils import Choices
+
+from .managers import CustomUserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
-    USER_ROLE_CHOICES = Choices(
-        'tailor', _('Tailor'),
-        'client', _('Client')
-    )
+    USER_ROLE_CHOICES = Choices("tailor", _("Tailor"), "client", _("Client"))
     username = models.CharField(verbose_name=_("Username"), max_length=255, unique=True)
     firstname = models.CharField(
         verbose_name=_("Firstname"),

@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from tailor_me import settings
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from apps.common.models import TimeStampModel
@@ -6,7 +6,7 @@ from model_utils import Choices
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 
-User = get_user_model()
+User = settings.AUTH_USER_MODEL
 
 
 def upload_profile_photo(instance, filename):
@@ -14,24 +14,13 @@ def upload_profile_photo(instance, filename):
 
 
 class UserProfile(TimeStampModel):
-
-    GENDER_CHOICES = Choices(
-        'male', _('Male'),
-        'female', _('Female')
-    )
+    GENDER_CHOICES = Choices("male", _("Male"), "female", _("Female"))
 
     user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     country = CountryField(
-        verbose_name=_("Country"),
-        default="GH",
-        blank=False,
-        null=False
+        verbose_name=_("Country"), default="GH", blank=False, null=False
     )
-    street = models.CharField(
-        max_length=200,
-        blank=True,
-        null=True
-    )
+    street = models.CharField(max_length=200, blank=True, null=True)
     house_number = models.CharField(max_length=50, null=True, blank=True)
     region = models.CharField(max_length=50, null=False, blank=False)
     city = models.CharField(
@@ -42,22 +31,15 @@ class UserProfile(TimeStampModel):
         null=False,
     )
     digital_address = models.CharField(max_length=15, null=False, blank=False)
-    contact = PhoneNumberField(
-        blank=True,
-        region='GH'
-    )
+    contact = PhoneNumberField(blank=True, region="GH")
     about_me = models.TextField(
-        verbose_name=_("About me"),
-        default="say something about yourself"
+        verbose_name=_("About me"), default="say something about yourself"
     )
     profile_photo = models.ImageField(
-        verbose_name=_("Profile Photo"),
-        upload_to=upload_profile_photo
+        verbose_name=_("Profile Photo"), upload_to=upload_profile_photo
     )
     gender = models.CharField(
-        max_length=10,
-        verbose_name="Gender",
-        choices=GENDER_CHOICES
+        max_length=10, verbose_name="Gender", choices=GENDER_CHOICES
     )
 
     def __str__(self):
@@ -66,9 +48,7 @@ class UserProfile(TimeStampModel):
 
 class UserMeasurements(TimeStampModel):
     profile = models.ForeignKey(
-        UserProfile,
-        on_delete=models.CASCADE,
-        related_name='measurements'
+        UserProfile, on_delete=models.CASCADE, related_name="measurements"
     )
     neck = models.DecimalField(
         verbose_name="Around neck",
@@ -78,11 +58,7 @@ class UserMeasurements(TimeStampModel):
         null=True,
     )
     bust = models.DecimalField(
-        verbose_name="Bust area",
-        max_digits=2,
-        decimal_places=0,
-        blank=True,
-        null=True
+        verbose_name="Bust area", max_digits=2, decimal_places=0, blank=True, null=True
     )
     arm_length = models.DecimalField(
         verbose_name="Arm length short",
@@ -99,18 +75,10 @@ class UserMeasurements(TimeStampModel):
         null=True,
     )
     bicep = models.DecimalField(
-        verbose_name="Bicep",
-        max_digits=2,
-        decimal_places=0,
-        blank=True,
-        null=True
+        verbose_name="Bicep", max_digits=2, decimal_places=0, blank=True, null=True
     )
     wrist = models.DecimalField(
-        verbose_name="Wrist",
-        max_digits=2,
-        decimal_places=0,
-        blank=True,
-        null=True
+        verbose_name="Wrist", max_digits=2, decimal_places=0, blank=True, null=True
     )
     torso = models.DecimalField(
         verbose_name="Torso length",
@@ -120,18 +88,10 @@ class UserMeasurements(TimeStampModel):
         null=True,
     )
     waist = models.DecimalField(
-        verbose_name="Waist",
-        max_digits=2,
-        decimal_places=0,
-        blank=True,
-        null=True
+        verbose_name="Waist", max_digits=2, decimal_places=0, blank=True, null=True
     )
     hips = models.DecimalField(
-        verbose_name="hips",
-        max_digits=2,
-        decimal_places=0,
-        blank=True,
-        null=True
+        verbose_name="hips", max_digits=2, decimal_places=0, blank=True, null=True
     )
     waist_to_above_knee = models.DecimalField(
         verbose_name="Skirt/ Shorts length",
@@ -148,9 +108,5 @@ class UserMeasurements(TimeStampModel):
         null=True,
     )
     calf = models.DecimalField(
-        verbose_name="Calf",
-        max_digits=2,
-        decimal_places=0,
-        blank=True,
-        null=True
+        verbose_name="Calf", max_digits=2, decimal_places=0, blank=True, null=True
     )

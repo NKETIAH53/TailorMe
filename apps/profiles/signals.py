@@ -2,7 +2,7 @@ import logging
 from django.db.models.signals import post_save
 from tailor_me.settings import AUTH_USER_MODEL
 from django.dispatch import receiver
-from .models import UserProfile, UserMeasurements
+from .models import UserProfile
 
 logger = logging.getLogger(__name__)
 
